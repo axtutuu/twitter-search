@@ -1,0 +1,5 @@
+@import url(node_modules/reset.css/reset.css);
+.wrapper {
+  font-family: sans-serif;
+  font-size: 16px;
+  line-height: 1.5; }
