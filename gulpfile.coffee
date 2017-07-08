@@ -6,6 +6,7 @@ browserify = require 'browserify'
 babelify = require 'babelify'
 source = require 'vinyl-source-stream'
 browser_sync = require 'browser-sync'
+watch = require 'gulp-watch'
 
 SRC  = './src'
 DEST = './public'
@@ -42,6 +43,9 @@ gulp.task 'browser-sync', () ->
     },
     ghostMode: false
   })
+  watch ["#{SRC}/scss/**/*.scss"], gulp.series('sass', browser_sync.reload)
+  watch ["#{SRC}/js/**/*.js"], gulp.series('browserify', browser_sync.reload)
+  watch ["#{SRC}/pug/**/*.pug"], gulp.series('pug', browser_sync.reload)
 
 gulp.task 'build',   gulp.parallel('sass', 'pug', 'browserify')
 gulp.task 'default', gulp.series('build', 'browser-sync')
