@@ -5,9 +5,11 @@ pug  = require 'gulp-pug'
 browserify = require 'browserify'
 babelify = require 'babelify'
 source = require 'vinyl-source-stream'
+browser_sync = require 'browser-sync'
 
 SRC  = './src'
 DEST = './public'
+PUBLIC = './public'
 
 gulp.task 'sass', () ->
   gulp.src "#{SRC}/scss/**/[!_]*.scss"
@@ -33,5 +35,13 @@ gulp.task 'browserify', () ->
     .pipe source('script.js')
     .pipe gulp.dest("#{DEST}/js")
 
+gulp.task 'browser-sync', () ->
+  browser_sync({
+    server: {
+        baseDir: PUBLIC
+    },
+    ghostMode: false
+  })
+
 gulp.task 'build',   gulp.parallel('sass', 'pug', 'browserify')
-gulp.task 'default', gulp.series('build')
+gulp.task 'default', gulp.series('build', 'browser-sync')
