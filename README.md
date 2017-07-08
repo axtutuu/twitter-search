@@ -1,5 +1,5 @@
 # twitter-search
-無理やりTwitterのタイムラインをCSVにエクスポート
+TwitterのタイムラインをCSVにエクスポートするスクリプト(無理やり)
 
 
 
